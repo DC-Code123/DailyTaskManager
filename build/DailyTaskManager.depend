@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1744452626 source:c:\users\hp\documents\dca\programming\projects\ideas-testing\dailytaskmanager\src\funcs.cpp
+	"../include/Task.h"
+
+1744455271 c:\users\hp\documents\dca\programming\projects\ideas-testing\dailytaskmanager\include\task.h
+	<iostream>
+	<string>
+	<vector>
+	<fstream>
+
+1744452601 source:c:\users\hp\documents\dca\programming\projects\ideas-testing\dailytaskmanager\src\main.cpp
+	"../include/Task.h"
+
