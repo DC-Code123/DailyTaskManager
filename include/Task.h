@@ -6,24 +6,25 @@
 #include <vector>
 #include <fstream>
 #include <stdexcept>
+using namespace std;
 
 struct Task {
-  std::string name;
+  string name;
   char state = 'P';  // 'P' for Pending, 'D' for Done
 };
 
 class TaskDB {
 private:
-  std::vector<Task> PendingTasks;
-  std::vector<Task> DoneTasks;
+  vector<Task> PendingTasks;
+  vector<Task> DoneTasks;
 
 public:
   TaskDB();
   void SaveTasks();
   void LoadTasks();
 
-  const std::vector<Task>& getPendingTasks() const { return PendingTasks; }
-  const std::vector<Task>& getDoneTasks() const { return DoneTasks; }
+  const vector<Task>& getPendingTasks() const { return PendingTasks; }
+  const vector<Task>& getDoneTasks() const { return DoneTasks; }
 
   void addPendingTask(const Task& task);
   void markTaskDone(size_t index);

@@ -1,5 +1,6 @@
 #include "../include/Task.h"
 #include <iostream>
+using namespace std;
 
 
 int main() {
@@ -25,11 +26,11 @@ int main() {
           break;
           
         default: 
-          std::cout << "Invalid choice.\n";
+          cout << "Invalid choice.\n";
       }
     } 
-    catch (const std::exception& e) {
-      std::cerr << "Error: " << e.what() << "\n";
+    catch (const exception& e) {
+      cerr << "Error: " << e.what() << "\n";
     }
   }
 

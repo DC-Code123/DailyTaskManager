@@ -1,5 +1,6 @@
 #include "../include/Task.h"
 #include <iostream>
+using namespace std;
 
 
 // ====================
@@ -7,14 +8,14 @@
 // ====================
 
 TaskDB::TaskDB() {
-  std::cout << "Database initialized.\n";
+  cout << "Database initialized.\n";
 }
 
 
 void TaskDB::SaveTasks() {
-  std::ofstream outFile("tasks.txt");
+  ofstream outFile("tasks.txt");
   if (!outFile) {
-    throw std::runtime_error("Failed to save tasks.");
+    throw runtime_error("Failed to save tasks.");
   }
 
   outFile << "Pending\n";
@@ -27,21 +28,21 @@ void TaskDB::SaveTasks() {
     outFile << task.name << '\n';
   }
   
-  std::cout << "Tasks saved.\n";
+  cout << "Tasks saved.\n";
 }
 
 
 void TaskDB::LoadTasks() {
-  std::ifstream inFile("tasks.txt");
+  ifstream inFile("tasks.txt");
   if (!inFile) {
-    std::cout << "No saved tasks found.\n";
+    cout << "No saved tasks found.\n";
     return;
   }
 
-  std::string line;
+  string line;
   bool isPending = true;
 
-  while (std::getline(inFile, line)) {
+  while (getline(inFile, line)) {
     if (line == "Pending") {
       isPending = true;
     } 
@@ -62,7 +63,7 @@ void TaskDB::LoadTasks() {
     }
   }
   
-  std::cout << "Tasks loaded.\n";
+  cout << "Tasks loaded.\n";
 }
 
 
@@ -73,7 +74,7 @@ void TaskDB::addPendingTask(const Task& task) {
 
 void TaskDB::markTaskDone(size_t index) {
   if (index >= PendingTasks.size()) {
-    throw std::out_of_range("Invalid task index.");
+    throw out_of_range("Invalid task index.");
   }
   
   Task task = PendingTasks[index];
@@ -85,7 +86,7 @@ void TaskDB::markTaskDone(size_t index) {
 
 void TaskDB::deletePendingTask(size_t index) {
   if (index >= PendingTasks.size()) {
-    throw std::out_of_range("Invalid task index.");
+    throw out_of_range("Invalid task index.");
   }
   PendingTasks.erase(PendingTasks.begin() + index);
 }
@@ -98,14 +99,14 @@ void TaskDB::deletePendingTask(size_t index) {
 void Options::AddTask(TaskDB& taskDB) {
   Task newTask;
   
-  std::cout << "Enter task name: ";
-  std::cin.ignore();
-  std::getline(std::cin, newTask.name);
+  cout << "Enter task name: ";
+  cin.ignore();
+  getline(cin, newTask.name);
   
   newTask.state = 'P';
   taskDB.addPendingTask(newTask);
   
-  std::cout << "Task added.\n";
+  cout << "Task added.\n";
 }
 
 
@@ -113,13 +114,13 @@ void Options::ViewPending(const TaskDB& taskDB) const {
   const auto& tasks = taskDB.getPendingTasks();
   
   if (tasks.empty()) {
-    std::cout << "No pending tasks.\n";
+    cout << "No pending tasks.\n";
     return;
   }
   
-  std::cout << "Pending Tasks:\n";
+  cout << "Pending Tasks:\n";
   for (size_t i = 0; i < tasks.size(); ++i) {
-    std::cout << i + 1 << ". " << tasks[i].name 
+    cout << i + 1 << ". " << tasks[i].name 
               << " [State: " << tasks[i].state << "]\n";
   }
 }
@@ -128,14 +129,14 @@ void Options::ViewPending(const TaskDB& taskDB) const {
 void Options::MarkDone(TaskDB& taskDB) {
   ViewPending(taskDB);
   
-  std::cout << "Enter task number to mark as done: ";
+  cout << "Enter task number to mark as done: ";
   size_t index;
-  std::cin >> index;
+  cin >> index;
 
-  if (std::cin.fail() || index < 1 || index > taskDB.getPendingTasks().size()) {
-    std::cin.clear();
-    std::cin.ignore(1000, '\n');
-    std::cout << "Invalid input.\n";
+  if (cin.fail() || index < 1 || index > taskDB.getPendingTasks().size()) {
+    cin.clear();
+    cin.ignore(1000, '\n');
+    cout << "Invalid input.\n";
     return;
   }
   
@@ -150,13 +151,13 @@ void Options::MarkDone(TaskDB& taskDB) {
 int DisplayMenu() {
   int choice;
   
-  std::cout << "\nMenu:\n"
+  cout << "\nMenu:\n"
             << "1. Add Task\n"
             << "2. View Pending\n"
             << "3. Mark Done\n"
             << "4. Exit\n"
             << "Choice: ";
             
-  std::cin >> choice;
+  cin >> choice;
   return choice;
 }
