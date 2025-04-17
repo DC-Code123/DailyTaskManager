@@ -5,24 +5,42 @@
 #include <string>
 #include <vector>
 #include <fstream>
-using namespace std;
+#include <stdexcept>
 
-// Structure to define a task
 struct Task {
-  string name;          // Task description
-  string state;         // "Pending" or "Done"
-  bool finishedness;    // true if done, false otherwise
+    std::string name;
+    char state = 'P';  // 'P' for Pending, 'D' for Done
 };
 
-// Function declarations
-void SaveTasks(const vector<Task>& pendingTasks, const vector<Task>& doneTasks);
-void LoadTasks(vector<Task>& pendingTasks, vector<Task>& doneTasks);
-void AddTask(vector<Task>& pendingTasks);
-void PrintTasks(const vector<Task>& tasks, const string& title);
-void ViewTask(const vector<Task>& pendingTasks);
-void MarkDone(vector<Task>& pendingTasks, vector<Task>& doneTasks);
-void ViewDone(const vector<Task>& doneTasks);
-void DeleteTask(vector<Task>& pendingTasks, vector<Task>& doneTasks);
+class TaskDB {
+private:
+    std::vector<Task> PendingTasks;
+    std::vector<Task> DoneTasks;
+
+public:
+    TaskDB();
+    void SaveTasks();
+    void LoadTasks();
+
+    // Getters
+    const std::vector<Task>& getPendingTasks() const { return PendingTasks; }
+    const std::vector<Task>& getDoneTasks() const { return DoneTasks; }
+
+    // Task modification methods
+    void addPendingTask(const Task& task);
+    void markTaskDone(size_t index);
+    void deletePendingTask(size_t index);
+};
+
+class Options {
+public:
+    void AddTask(TaskDB& taskDB);
+    void ViewPending(const TaskDB& taskDB) const;
+    void MarkDone(TaskDB& taskDB);
+    void ViewDone(const TaskDB& taskDB) const;
+    void DeleteTask(TaskDB& taskDB);
+};
+
 int DisplayMenu();
 
-#endif // TASK_H
+#endif
