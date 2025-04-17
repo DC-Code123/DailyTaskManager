@@ -54,7 +54,7 @@ void LoadTasks(vector<Task>& pendingTasks, vector<Task>& doneTasks) {
 }
 
 // Function to add a task to pendingTasks
-void AddTask(vector<Task>& pendingTasks) {
+void AddTask(const vector<Task>& pendingTasks) {
   Task newTask;
   cout << "Enter task name: ";
   cin.ignore();
