@@ -10,7 +10,7 @@ int main() {
   Options options;
   int choice;
 
-  while ((choice = DisplayMenu()) != 4) {
+  while ((choice = DisplayMenu()) != 6) {
     try {
       switch (choice) {
         case 1: 
@@ -24,7 +24,15 @@ int main() {
         case 3: 
           options.MarkDone(taskDB); 
           break;
-          
+
+        case 4:
+          options.ViewDone(taskDB);
+          break;
+
+        case 5:
+          options.DeleteTask(taskDB);
+          break;
+
         default: 
           cout << "Invalid choice.\n";
       }

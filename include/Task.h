@@ -29,6 +29,7 @@ public:
   void addPendingTask(const Task& task);
   void markTaskDone(size_t index);
   void deletePendingTask(size_t index);
+  void deleteDoneTask(size_t index);
 };
 
 class Options {
