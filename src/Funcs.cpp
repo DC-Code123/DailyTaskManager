@@ -12,7 +12,7 @@ TaskDB::TaskDB() {
 }
 
 void TaskDB::SaveTasks() {
-  ofstream outFile("tasks.txt");
+  ofstream outFile("Data.txt");
   if (!outFile) {
     throw runtime_error("Failed to save tasks.");
   }
@@ -27,11 +27,13 @@ void TaskDB::SaveTasks() {
     outFile << task.name << '\n';
   }
   
-  cout << "Tasks saved.\n";
+  cout<<"\nTask saving";
+  cout<<"\n...\n...\n...\n";
+  cout<<"Task saved!";
 }
 
 void TaskDB::LoadTasks() {
-  ifstream inFile("tasks.txt");
+  ifstream inFile("Data.txt");
   if (!inFile) {
     cout << "No saved tasks found.\n";
     return;
@@ -61,7 +63,10 @@ void TaskDB::LoadTasks() {
     }
   }
   
+  cout << "Task loading...."
+       << "\n...\n...\n...\n";
   cout << "Tasks loaded.\n";
+  cout << "------------------------------------------------\n";
 }
 
 void TaskDB::addPendingTask(const Task& task) {
@@ -80,14 +85,14 @@ void TaskDB::markTaskDone(size_t index) {
 }
 
 void TaskDB::deletePendingTask(size_t index) {
-  if (index >= PendingTasks.size()) {
+  if (index > PendingTasks.size()||index<0) {
     throw out_of_range("Invalid task index.");
   }
   PendingTasks.erase(PendingTasks.begin() + index);
 }
 
 void TaskDB::deleteDoneTask(size_t index) {
-  if (index >= DoneTasks.size()) {
+  if (index > DoneTasks.size()<index<0) {
     throw out_of_range("Invalid task index.");
   }
   PendingTasks.erase(PendingTasks.begin() + index);
@@ -107,7 +112,10 @@ void Options::AddTask(TaskDB& taskDB) {
   newTask.state = 'P';
   taskDB.addPendingTask(newTask);
   
+  cout << "Task adding"
+       <<"\n...\n...\n...\n";
   cout << "Task added.\n";
+  cout << "------------------------------------------------\n";
 }
 
 void Options::ViewPending(const TaskDB& taskDB) const {
@@ -123,6 +131,7 @@ void Options::ViewPending(const TaskDB& taskDB) const {
     cout << i + 1 << ". " << tasks[i].name 
               << " [State: " << tasks[i].state << "]\n";
   }
+  cout << "------------------------------------------------\n";
 }
 
 void Options::MarkDone(TaskDB& taskDB) {
@@ -155,11 +164,13 @@ void Options::ViewDone(const TaskDB& taskDB) const {
     cout << i + 1 << ". " << tasks[i].name 
               << " [State: " << tasks[i].state << "]\n";
   }
+  cout << "------------------------------------------------\n";
 }
 
 void Options::DeleteTask(TaskDB& taskDB){
   cout<<"What type of task do you want to delete?\n";
-  cout<<"1.Pending Task \n2.Done task\n";
+  cout<<"1.Pending Task \n2.Done task\n"
+      <<"------------------------------------------------\n";
   cout<<"Choice:";
   int choice1;
   cin>>choice1;
@@ -177,8 +188,10 @@ void Options::DeleteTask(TaskDB& taskDB){
     cout<<"Enter task number to delete: ";
     cin>>index;
     taskDB.deletePendingTask(index);
-    cout<<"\nTask deleting...";
+    cout<<"\nTask deleting";
+    cout<<"\n...\n...\n...\n";
     cout<<"Task deleted!";
+    cout<<"------------------------------------------------\n";
   }
 
   else{
@@ -187,8 +200,10 @@ void Options::DeleteTask(TaskDB& taskDB){
     cout<<"Enter task number to delete: ";
     cin>>index;
     taskDB.deleteDoneTask(index);
-    cout<<"Task deleting...";
-    cout<<"Task deleted!";
+    cout<<"\nTask deleting";
+    cout<<"\n...\n...\n...\n";
+    cout<<"Task deleted!\n";
+    cout<<"------------------------------------------------\n";
   }
 }
 
@@ -206,8 +221,9 @@ int DisplayMenu() {
             << "4. View Done tasks\n"
             << "5. Delete a task from memory\n"
             << "6. Exit\n"
-            << "Choice: ";
-            
+            << "------------------------------------------------\n"
+            << "Choice: ";         
   cin >> choice;
+  cout<< "------------------------------------------------\n";
   return choice;
 }

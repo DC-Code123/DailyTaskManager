@@ -7,7 +7,7 @@ A console-based application for managing daily tasks. You can:
 
 To build the program:
 bash(cmd)
-g++ src\main.cpp src\Task.cpp -Iinclude -o bin
+g++ src\main.cpp src\Funcs.cpp -Iinclude -o bin\output
 
 To compile:
 bin\output
