@@ -33,12 +33,14 @@ public:
 };
 
 class Options {
+private:
+  bool empty = true;
 public:
   void AddTask(TaskDB& taskDB);
-  void ViewPending(const TaskDB& taskDB) const;
-  void MarkDone(TaskDB& taskDB);
-  void ViewDone(const TaskDB& taskDB) const;
-  void DeleteTask(TaskDB& taskDB);
+  void ViewPending(const TaskDB& taskDB,Options& options) const;
+  void MarkDone(TaskDB& taskDB,Options& options);
+  void ViewDone(const TaskDB& taskDB,Options& options) const;
+  void DeleteTask(TaskDB& taskDB,Options& options);
 };
 
 int DisplayMenu();

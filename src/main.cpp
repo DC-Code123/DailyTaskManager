@@ -17,19 +17,19 @@ int main() {
           break;
           
         case 2: 
-          options.ViewPending(taskDB); 
+          options.ViewPending(taskDB,options); 
           break;
           
         case 3: 
-          options.MarkDone(taskDB); 
+          options.MarkDone(taskDB,options); 
           break;
 
         case 4:
-          options.ViewDone(taskDB);
+          options.ViewDone(taskDB,options);
           break;
 
         case 5:
-          options.DeleteTask(taskDB);
+          options.DeleteTask(taskDB,options);
           break;
 
         default: 
